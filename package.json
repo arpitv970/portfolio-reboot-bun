@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-reboot-bun",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+	"description": "This is monorepo for my personal portfolio and all the tech stack is used here is just for experimentations",
+	"author": "Arpit Verma",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
