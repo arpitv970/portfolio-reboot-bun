@@ -5,6 +5,13 @@
   "private": true,
 	"description": "This is monorepo for my personal portfolio and all the tech stack is used here is just for experimentations",
 	"author": "Arpit Verma",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "web:dev": "bun run --filter web dev",
+    "web:build": "bun run --filter web build",
+    "web:preview": "bun run --filter web preview",
+    "web:astro": "bun run --filter web astro"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
