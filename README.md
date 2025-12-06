@@ -1,5 +1,5 @@
 > [!WARNING]  
-> This is me trying `[bun](https://bun.sh)` for managing `workspaces`
+> This is me trying [bun](https://bun.sh) for managing `workspaces`
 
 # Portfolio Reboot Bun
 
