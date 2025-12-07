@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"
-import { MenuIcon, MoonIcon, SunIcon, XIcon } from "lucide-react"
+import { useEffect, useState } from "react";
 
 const routes = [
   { href: "/", label: "Home" },
@@ -10,22 +10,39 @@ const routes = [
   { href: "/contact", label: "Contact" },
 ]
 
-export const NavBar = () => {
+interface IProp {
+  pathname: string
+}
+export const NavBar: React.FC<IProp> = ({
+  pathname
+}) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [])
   return (
     <nav
       className={cn(
-        // "fixed top-0 w-full z-50 transition-all duration-300",
-        // "bg-background/80 backdrop-blur-lg border-b"
+        "fixed top-0 w-full z-50 transition-all duration-300",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-lg border-b"
+          : "bg-background",
       )}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center my-8">
+        <div className="flex items-center justify-center my-4">
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {routes.map((route) => (
               <a key={route.href} href={route.href}>
                 <Button
-                  variant={'ghost'}
+                  variant={pathname === route.href ? "secondary" : "ghost"}
                 >
                   {route.label}
                 </Button>
@@ -38,6 +55,7 @@ export const NavBar = () => {
             variant="ghost"
             size="icon"
             className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
           </Button>
         </div>
