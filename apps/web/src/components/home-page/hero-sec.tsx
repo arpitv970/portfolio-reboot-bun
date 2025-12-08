@@ -1,9 +1,10 @@
-import { Button } from "./ui/button"
+import { SectionWrapper } from "../shared"
+import { Button } from "../ui/button"
 
 export const HeroSec = () => {
   return (
 
-    < section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-secondary/20 relative z-10" >
+    <SectionWrapper className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-secondary/20 relative z-10" >
       <div className="space-y-6 text-center">
         <p className="text-3xl md:text-4xl font-semibold tracking-wide">
           {`I'm`} <span className="italic font-serif font-black">Arpit</span>{" "}
@@ -19,7 +20,6 @@ export const HeroSec = () => {
           <a href="/contact">{`Let's Work Together`}</a>
         </Button>
       </div>
-    </section >
-
+    </SectionWrapper>
   )
 }
