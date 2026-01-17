@@ -3,7 +3,6 @@ import { Button } from "../ui/button"
 
 export const HeroSec = () => {
   return (
-
     <SectionWrapper className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-secondary/20 relative z-10" >
       <div className="space-y-6 text-center">
         <p className="text-3xl md:text-4xl font-semibold tracking-wide">
@@ -11,10 +10,14 @@ export const HeroSec = () => {
           👋
         </p>
         <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-          Crafting seamless web experiences with precision and creativity.
+          Building{' '}
+          <span className="underline italic decoration-wavy decoration-2 decoration-primary/70 underline-offset-4">
+            boring systems
+          </span>{' '}
+          that quietly print serious money for your business
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          {`A Full Stack Developer passionate about building exceptional digital experiences that make a difference.`}
+          Engineering scalable multi-tenant <b>CRMs, ERPs & Dashboards</b> with granular access controls and plugins for <i>Salesforce, SAP or any of your ecosystem</i>
         </p>
         <Button asChild size="lg" className="mt-8 z-10">
           <a href="/contact">{`Let's Work Together`}</a>
