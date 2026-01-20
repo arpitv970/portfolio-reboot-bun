@@ -1,0 +1,88 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { MaxWidthWrapper } from '@/components/shared'
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("project");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(project);
+const { title, description, tags, coverImgSrc } = project.data;
+const { readingTime } = remarkPluginFrontmatter;
+---
+
+<BaseLayout title={title} description={description}>
+  <MaxWidthWrapper>
+    <article class="mt-20">
+
+      {/* Hero Image - Constrained Height */}
+      <div class="relative w-full aspect-[2/1] rounded-xl overflow-hidden border bg-muted mb-8 shadow-sm">
+        <img
+          src={coverImgSrc}
+          alt={title}
+          class="w-full h-full object-cover"
+          transition:name={`image-${project.id}`}
+        />
+      </div>
+
+      {/* Header Info */}
+      <div class="space-y-6">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
+          {title}
+        </h1>
+        
+        <p class="text-xl text-muted-foreground leading-relaxed">
+          {description}
+        </p>
+
+        {remarkPluginFrontmatter?.readingTime && (
+          <div class="flex items-center gap-2 text-sm text-muted-foreground">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            {readingTime}
+          </div>
+        )}
+
+        {tags && (
+          <div class="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <Badge key={tag} variant="secondary" className="px-3 py-1 text-sm">
+                #{tag}
+              </Badge>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <Separator className="my-10" />
+
+      {/* Content */}
+      <div class="prose prose-lg max-w-none">
+        <Content />
+      </div>
+
+      {/* Footer */}
+      <div class="mt-20 pt-8 border-t flex justify-between items-center text-muted-foreground">
+        <span class="text-sm">© {new Date().getFullYear()} Arpit Verma</span>
+        <a href="/projects">
+          <Button variant="link" className="text-primary">
+            View all projects
+          </Button>
+        </a>
+      </div>
+
+    </article>
+  </MaxWidthWrapper>
+</BaseLayout>
