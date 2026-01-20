@@ -1,9 +1,16 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro"
 import PageWrapper from "@/components/shared/PageWrapper.astro"
+import { getCollection } from "astro:content";
+import { ProjectCard } from "@/components/shared/project";
+
+const projects = await getCollection("project");
 ---
 <BaseLayout>
   <PageWrapper title="Personal Projects">
-    asdf
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    {projects.map(p => <ProjectCard project={p} />)}
+          </div>
   </PageWrapper>
 </BaseLayout>

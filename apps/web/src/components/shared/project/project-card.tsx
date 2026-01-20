@@ -3,10 +3,11 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import type { CollectionEntry } from "astro:content"
 
 interface IProps {
-  data: CollectionEntry<'project'>['data']
+  project: CollectionEntry<'project'>
 }
 
-export const ProjectCard: React.FC<IProps> = ({ data }) => {
+export const ProjectCard: React.FC<IProps> = ({ project }) => {
+  const { id, data } = project
 
   return (
 
