@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"
 import { useEffect, useState } from "react";
+import { MaxWidthWrapper } from "./max-width-wrapper";
 
 const routes = [
   { href: "/", label: "Home" },
@@ -35,33 +36,35 @@ export const NavBar: React.FC<IProp> = ({
           : "bg-background",
       )}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center my-4">
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
-            {routes.map((route) => (
-              <a key={route.href} href={route.href}>
-                <Button
-                  variant={pathname === route.href ? "secondary" : "ghost"}
-                >
-                  {route.label}
-                </Button>
-              </a>
-            ))}
+      <MaxWidthWrapper>
+        <div className="mx-auto px-4">
+          <div className="flex items-center justify-center my-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-6">
+              {routes.map((route) => (
+                <a key={route.href} href={route.href}>
+                  <Button
+                    variant={pathname === route.href ? "secondary" : "ghost"}
+                  >
+                    {route.label}
+                  </Button>
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+            </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-          </Button>
+          {/* Mobile Navigation */}
         </div>
-
-        {/* Mobile Navigation */}
-      </div>
+      </MaxWidthWrapper>
     </nav>
   )
 }
