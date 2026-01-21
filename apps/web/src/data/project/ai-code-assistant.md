@@ -10,8 +10,6 @@ description: An intelligent code assistant that helps developers write better co
 coverImgSrc: https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80
 ---
 
-# AI-Powered Code Assistant
-
 ## Intelligent Code Generation & Analysis
 
 Developed an advanced code assistant that leverages GPT-4 and custom machine learning models to provide intelligent code suggestions, bug detection, and automated refactoring recommendations.

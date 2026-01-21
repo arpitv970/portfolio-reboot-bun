@@ -10,8 +10,6 @@ description: Blockchain-based voting platform ensuring transparency, anonymity, 
 coverImgSrc: https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=1200&q=80
 ---
 
-# Decentralized Voting System
-
 ## Innovation in Digital Democracy
 
 Created a secure voting system leveraging Ethereum smart contracts to eliminate fraud and ensure vote integrity. Each vote is cryptographically sealed and permanently recorded on the blockchain, creating an immutable audit trail.

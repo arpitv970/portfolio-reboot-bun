@@ -10,8 +10,6 @@ description: A ultra-low latency trading system processing millions of orders pe
 coverImgSrc: https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80
 ---
 
-# High-Performance Trading Engine
-
 ## Ultra-Low Latency Trading System
 
 Developed a high-frequency trading engine capable of processing millions of orders per second with sub-microsecond latency, using Rust for core logic and Go for orchestration.

@@ -42,13 +42,19 @@ const { readingTime } = remarkPluginFrontmatter;
             </svg>
             {readingTime}
           </div>
-        )}
+         )}
 
-        {tags && (
+       {/* Project Title */}
+       <h1 class="text-5xl text-pretty font-black mb-4">{title}</h1>
+
+       {/* Project Description */}
+       <p class="text-lg text-muted-foreground mb-6">{description}</p>
+
+         {tags && (
           <div class="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <Badge key={tag} variant="secondary" className="px-3 py-1 text-sm">
-                #{tag}
+                {tag}
               </Badge>
             ))}
           </div>

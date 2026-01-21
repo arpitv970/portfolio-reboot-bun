@@ -10,8 +10,6 @@ description: A scalable data processing pipeline handling billions of events dai
 coverImgSrc: https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80
 ---
 
-# Distributed Data Pipeline
-
 ## High-Throughput Data Processing System
 
 Built a robust data pipeline that processes billions of events daily, combining Apache Spark, Kubernetes orchestration, and real-time analytics for enterprise-scale data processing.

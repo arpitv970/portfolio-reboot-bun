@@ -10,8 +10,6 @@ description: Google Docs-style collaborative code editor with syntax highlightin
 coverImgSrc: https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80
 ---
 
-# Real-Time Collaborative Code Editor
-
 ## Project Overview
 
 Built a browser-based collaborative code editor that enables multiple developers to write code simultaneously with real-time synchronization, similar to Google Docs but optimized for programming workflows.

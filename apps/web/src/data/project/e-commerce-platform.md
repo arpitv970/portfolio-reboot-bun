@@ -9,8 +9,6 @@ description: A modern, scalable e-commerce platform with real-time inventory man
 coverImgSrc: https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&q=80
 ---
 
-# E-Commerce Platform Redesign
-
 ## Overview
 
 Built a full-stack e-commerce solution that handles over 10,000 daily transactions with 99.9% uptime. The platform features a responsive design, advanced search capabilities, and an integrated analytics dashboard.
