@@ -11,3 +11,48 @@ import '../styles/global.css'
     <Footer />
   </div>
 </Layout>
+
+<script>
+  // Add copy buttons to code blocks and handle copy functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Add copy buttons to all pre elements that don't already have them
+    document.querySelectorAll('pre:not(:has(.copy-button))').forEach(pre => {
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.setAttribute('aria-label', 'Copy code');
+      button.textContent = 'Copy';
+
+      pre.style.position = 'relative';
+      pre.appendChild(button);
+    });
+
+    document.addEventListener('click', async (event) => {
+      const target = event.target as Element;
+      const button = target?.closest('.copy-button') as HTMLButtonElement;
+      if (!button) return;
+
+      const pre = button.closest('pre');
+      const code = pre?.querySelector('code');
+      if (!code) return;
+
+      const originalText = button.textContent || 'Copy';
+
+      try {
+        await navigator.clipboard.writeText(code.textContent || '');
+        button.textContent = 'Copied!';
+        button.setAttribute('data-copied', 'true');
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.removeAttribute('data-copied');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy code:', err);
+        button.textContent = 'Failed';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      }
+    });
+  });
+</script>
