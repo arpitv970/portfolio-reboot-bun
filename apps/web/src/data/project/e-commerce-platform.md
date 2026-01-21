@@ -15,6 +15,26 @@ coverImgSrc: https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&q=
 
 Built a full-stack e-commerce solution that handles over 10,000 daily transactions with 99.9% uptime. The platform features a responsive design, advanced search capabilities, and an integrated analytics dashboard.
 
+## User Journey Flow
+
+```mermaid
+flowchart TD
+    A[User Browses Site] --> B[Search Products]
+    B --> C[View Product Details]
+    C --> D[Add to Cart]
+    D --> E[Review Cart]
+    E --> F[Enter Shipping Info]
+    F --> G[Payment Processing]
+    G --> H[Order Confirmation]
+
+    I[AI Recommendations] --> C
+    J[Real-time Inventory] --> C
+    K[Multi-currency Support] --> G
+
+    style A fill:#e1f5fe
+    style H fill:#c8e6c9
+```
+
 ## Key Features
 
 ### Real-time Inventory Management

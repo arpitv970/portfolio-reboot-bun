@@ -16,6 +16,28 @@ coverImgSrc: https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200
 
 Built a browser-based collaborative code editor that enables multiple developers to write code simultaneously with real-time synchronization, similar to Google Docs but optimized for programming workflows.
 
+## Collaboration Architecture
+
+```mermaid
+flowchart TD
+    A[User Edits Code] --> B[CRDT Transform]
+    B --> C[WebSocket Broadcast]
+    C --> D[Receive Updates]
+    D --> E[Apply Changes]
+    E --> F[Update UI]
+
+    G[Multiple Users] --> H[Conflict Resolution]
+    H --> I[Consistent State]
+    I --> F
+
+    J[Monaco Editor] --> K[Syntax Highlighting]
+    K --> L[Code Completion]
+    L --> A
+
+    style A fill:#e1f5fe
+    style F fill:#c8e6c9
+```
+
 ## Core Features
 
 ### Real-Time Synchronization

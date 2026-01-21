@@ -16,6 +16,28 @@ coverImgSrc: https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=1200
 
 Created a secure voting system leveraging Ethereum smart contracts to eliminate fraud and ensure vote integrity. Each vote is cryptographically sealed and permanently recorded on the blockchain, creating an immutable audit trail.
 
+## Voting Process Flow
+
+```mermaid
+flowchart TD
+    A[Voter Registration] --> B[KYC Verification]
+    B --> C[Receive Voting Token]
+    C --> D[Access Ballot]
+    D --> E[Cast Encrypted Vote]
+    E --> F[Submit to Blockchain]
+    F --> G[Verify Transaction]
+    G --> H[Publish Results]
+
+    I[Election Official] --> J[Multi-sig Controls]
+    J --> K[Start Election]
+    K --> L[Monitor Process]
+    L --> M[Close Voting]
+    M --> H
+
+    style A fill:#e1f5fe
+    style H fill:#c8e6c9
+```
+
 ## Security Architecture
 
 ### Zero-Knowledge Proofs
