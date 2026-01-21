@@ -35,6 +35,7 @@ const { readingTime } = remarkPluginFrontmatter;
         />
       </div>
 
+      <div>
         {remarkPluginFrontmatter?.readingTime && (
           <div class="flex items-center gap-2 text-sm text-muted-foreground">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,15 +43,15 @@ const { readingTime } = remarkPluginFrontmatter;
             </svg>
             {readingTime}
           </div>
-         )}
+        )}
 
-       {/* Project Title */}
-       <h1 class="text-5xl text-pretty font-black mb-4">{title}</h1>
+        {/* Project Title */}
+        <h1 class="text-5xl text-pretty font-black mb-4">{title}</h1>
 
-       {/* Project Description */}
-       <p class="text-lg text-muted-foreground mb-6">{description}</p>
+        {/* Project Description */}
+        <p class="text-lg text-muted-foreground mb-6">{description}</p>
 
-         {tags && (
+        {tags && (
           <div class="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <Badge key={tag} variant="secondary" className="px-3 py-1 text-sm">
@@ -63,11 +64,76 @@ const { readingTime } = remarkPluginFrontmatter;
 
       <Separator className="my-10" />
 
-       {/* Content */}
-       <div class="prose prose-lg max-w-none dark:prose-invert">
-         <Content />
-       </div>
+      {/* Content */}
+      <div class="prose prose-lg max-w-none dark:prose-invert">
+        <Content />
+      </div>
 
     </article>
   </MaxWidthWrapper>
 </BaseLayout>
+
+<script>
+  // Add copy buttons to code blocks (but not Mermaid diagrams)
+  function addCopyButtons() {
+    const codeBlocks = document.querySelectorAll('pre:not(.mermaid)');
+    
+    codeBlocks.forEach((pre) => {
+      // Skip if already has a copy button
+      if (pre.querySelector('.copy-button')) return;
+      
+      // Skip if this is a Mermaid diagram
+      if (pre.classList.contains('mermaid') || pre.querySelector('.mermaid')) return;
+      
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.textContent = 'Copy';
+      button.setAttribute('aria-label', 'Copy code to clipboard');
+      
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code');
+        if (!code) return;
+        
+        try {
+          await navigator.clipboard.writeText(code.textContent || '');
+          button.textContent = 'Copied!';
+          button.setAttribute('data-copied', 'true');
+          
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.removeAttribute('data-copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          button.textContent = 'Failed';
+          
+          setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 2000);
+        }
+      });
+      
+      pre.appendChild(button);
+    });
+  }
+
+  // Run on page load
+  addCopyButtons();
+  
+  // Re-run after view transitions
+  document.addEventListener('astro:page-load', addCopyButtons);
+</script>
+
+<style>
+  /* Ensure Mermaid diagrams are not affected by code block styles */
+  .prose pre.mermaid,
+  .prose .mermaid {
+    padding: 1.5rem;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .prose pre.mermaid code {
+    display: none; /* Hide any code tags inside Mermaid */
+  }
+</style>

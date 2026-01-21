@@ -282,3 +282,71 @@ Peer-to-peer video streaming with fallback to TURN servers:
 - Language server protocol integration
 - Code execution and debugging
 - Whiteboard for architectural discussions
+
+# Mermaid Test Suite
+
+## Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -->|Yes| C[OK]
+    B -->|No| D[End]
+
+```
+
+## Sequence Diagram
+```mermaid
+sequenceDiagram
+    Alice->>John: Hello John
+    John-->>Alice: Great!
+```
+
+## Class Diagram
+```mermaid
+classDiagram
+    Animal <|-- Duck
+    Animal : +int age
+```
+
+## State Diagram
+```mermaid
+stateDiagram-v2
+    [*] --> Still
+    Still --> Moving
+```
+
+## ER Diagram
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+```
+
+## Gantt Chart
+```mermaid
+gantt
+    title Project Schedule
+    section Design
+    Task 1 :a1, 2024-01-01, 30d
+```
+
+## Git Graph
+```mermaid
+gitGraph
+    commit id: "Initial"
+    branch develop
+    checkout develop
+    commit id: "Feature"
+    checkout main
+    merge develop
+
+```
+
+## Architecture
+```mermaid
+flowchart TD
+    subgraph API[API Layer]
+        web[Web Server]
+    end
+    db[(Database)]
+    web --> db
+```

@@ -145,7 +145,12 @@
   color: var(--tw-prose-body);
   max-width: none;
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: var(--tw-prose-headings);
   }
 
@@ -267,4 +272,273 @@
 .prose pre .copy-button[data-copied="true"] {
   background: var(--color-primary);
   color: var(--color-primary-foreground);
+}
+
+/* ========================================
+   Mermaid Diagram Styles
+   ======================================== */
+
+/* Container for Mermaid diagrams */
+.prose .mermaid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  min-height: 200px;
+}
+
+/* Ensure SVG is responsive and centered */
+.prose .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Dark mode adjustments for Mermaid diagrams */
+.dark .prose .mermaid {
+  background-color: var(--color-card);
+}
+
+/* Specific styling for different diagram types */
+
+/* Flowcharts */
+.prose .mermaid .flowchart-link {
+  stroke: var(--color-primary);
+  stroke-width: 2px;
+}
+
+.prose .mermaid .node rect,
+.prose .mermaid .node circle,
+.prose .mermaid .node ellipse,
+.prose .mermaid .node polygon {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+  stroke-width: 2px;
+}
+
+.prose .mermaid .node text {
+  fill: var(--color-foreground);
+}
+
+/* Sequence diagrams */
+.prose .mermaid .actor {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+.prose .mermaid .actor-line {
+  stroke: var(--color-muted-foreground);
+}
+
+.prose .mermaid .messageLine0,
+.prose .mermaid .messageLine1 {
+  stroke: var(--color-primary);
+}
+
+.prose .mermaid .messageText {
+  fill: var(--color-foreground);
+}
+
+.prose .mermaid .labelText {
+  fill: var(--color-foreground);
+}
+
+/* Class diagrams */
+.prose .mermaid .classBox {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+.prose .mermaid .classLabel {
+  fill: var(--color-foreground);
+}
+
+/* State diagrams */
+.prose .mermaid .state-note,
+.prose .mermaid .stateGroup .composit {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+.prose .mermaid .state-note text {
+  fill: var(--color-foreground);
+}
+
+/* ER diagrams */
+.prose .mermaid .er.entityBox {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+.prose .mermaid .er.relationshipLabelBox {
+  fill: var(--color-background);
+  stroke: var(--color-border);
+}
+
+.prose .mermaid .er .entityLabel {
+  fill: var(--color-foreground);
+}
+
+/* Gantt charts */
+.prose .mermaid .grid .tick {
+  stroke: var(--color-border);
+}
+
+.prose .mermaid .grid .tick text {
+  fill: var(--color-muted-foreground);
+}
+
+.prose .mermaid .task {
+  fill: var(--color-primary);
+  stroke: var(--color-primary);
+}
+
+.prose .mermaid .taskText {
+  fill: var(--color-foreground);
+}
+
+.prose .mermaid .section {
+  fill: var(--color-secondary);
+}
+
+/* Git graphs */
+.prose .mermaid .commit-id,
+.prose .mermaid .commit-msg,
+.prose .mermaid .branch-label {
+  fill: var(--color-foreground);
+}
+
+.prose .mermaid .commit0,
+.prose .mermaid .commit1,
+.prose .mermaid .commit2,
+.prose .mermaid .commit3 {
+  stroke: var(--color-primary);
+  fill: var(--color-primary);
+}
+
+/* Pie charts */
+.prose .mermaid .pieCircle {
+  stroke: var(--color-background);
+}
+
+.prose .mermaid .pieTitleText {
+  fill: var(--color-foreground);
+}
+
+.prose .mermaid .legend text {
+  fill: var(--color-foreground);
+}
+
+/* Architecture diagrams */
+.prose .mermaid .architecture-service {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+.prose .mermaid .architecture-group {
+  stroke: var(--color-border);
+  stroke-dasharray: 5, 5;
+}
+
+/* Timeline diagrams */
+.prose .mermaid .timeline-event {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+/* Sankey diagrams */
+.prose .mermaid .sankey-link {
+  fill: none;
+  stroke: var(--color-primary);
+  opacity: 0.5;
+}
+
+.prose .mermaid .sankey-node rect {
+  fill: var(--color-secondary);
+  stroke: var(--color-primary);
+}
+
+/* Labels and text elements */
+.prose .mermaid .label,
+.prose .mermaid text {
+  font-family: inherit;
+  fill: var(--color-foreground);
+}
+
+/* Arrows and connectors */
+.prose .mermaid .arrowheadPath {
+  fill: var(--color-primary);
+}
+
+.prose .mermaid .marker {
+  fill: var(--color-primary);
+  stroke: var(--color-primary);
+}
+
+/* Clusters and groups */
+.prose .mermaid .cluster rect,
+.prose .mermaid .cluster polygon {
+  fill: var(--color-muted);
+  stroke: var(--color-border);
+  stroke-width: 1px;
+}
+
+.prose .mermaid .cluster text {
+  fill: var(--color-foreground);
+}
+
+/* Notes and annotations */
+.prose .mermaid .note {
+  fill: var(--color-accent);
+  stroke: var(--color-border);
+}
+
+.prose .mermaid .noteText {
+  fill: var(--color-foreground);
+}
+
+/* Ensure proper spacing between diagrams */
+.prose .mermaid + .mermaid {
+  margin-top: 3rem;
+}
+
+/* Loading state for Mermaid */
+.prose .mermaid[data-processed="false"] {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prose .mermaid[data-processed="false"]::before {
+  content: "Loading diagram...";
+  color: var(--color-muted-foreground);
+  font-size: 0.875rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .prose .mermaid {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .prose .mermaid svg {
+    font-size: 0.875rem;
+  }
+}
+
+/* Print styles for Mermaid */
+@media print {
+  .prose .mermaid {
+    border: 1px solid #ddd;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 }
