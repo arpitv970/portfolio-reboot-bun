@@ -257,5 +257,4 @@ HAVING event_count > 5
 ORDER BY avg_value DESC
 LIMIT 100
 SETTINGS max_threads = 8;
-```</content>
-<parameter name="filePath">/Users/arpitv970/projects/portfolio-reboot-bun/apps/web/src/data/project/distributed-data-pipeline.md
+```
