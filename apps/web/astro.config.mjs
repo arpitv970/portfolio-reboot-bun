@@ -4,6 +4,9 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import mermaid from 'astro-mermaid';
 import rehypePrettyCode from 'rehype-pretty-code';
+import { unified } from 'unified';
+import rehypeParse from 'rehype-parse';
+import rehypeStringify from 'rehype-stringify';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -168,7 +171,9 @@ export default defineConfig({
           keepBackground: false,
           defaultLang: {
             block: 'plaintext'
-          }
+          },
+          // Completely ignore mermaid code blocks
+          ignore: ['mermaid']
         }
       ]
     ]

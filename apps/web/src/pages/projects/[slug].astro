@@ -73,56 +73,7 @@ const { readingTime } = remarkPluginFrontmatter;
   </MaxWidthWrapper>
 </BaseLayout>
 
-<script>
-  // Add copy buttons to code blocks (but not Mermaid diagrams)
-  function addCopyButtons() {
-    const codeBlocks = document.querySelectorAll('pre:not(.mermaid)');
-    
-    codeBlocks.forEach((pre) => {
-      // Skip if already has a copy button
-      if (pre.querySelector('.copy-button')) return;
-      
-      // Skip if this is a Mermaid diagram
-      if (pre.classList.contains('mermaid') || pre.querySelector('.mermaid')) return;
-      
-      const button = document.createElement('button');
-      button.className = 'copy-button';
-      button.textContent = 'Copy';
-      button.setAttribute('aria-label', 'Copy code to clipboard');
-      
-      button.addEventListener('click', async () => {
-        const code = pre.querySelector('code');
-        if (!code) return;
-        
-        try {
-          await navigator.clipboard.writeText(code.textContent || '');
-          button.textContent = 'Copied!';
-          button.setAttribute('data-copied', 'true');
-          
-          setTimeout(() => {
-            button.textContent = 'Copy';
-            button.removeAttribute('data-copied');
-          }, 2000);
-        } catch (err) {
-          console.error('Failed to copy:', err);
-          button.textContent = 'Failed';
-          
-          setTimeout(() => {
-            button.textContent = 'Copy';
-          }, 2000);
-        }
-      });
-      
-      pre.appendChild(button);
-    });
-  }
 
-  // Run on page load
-  addCopyButtons();
-  
-  // Re-run after view transitions
-  document.addEventListener('astro:page-load', addCopyButtons);
-</script>
 
 <style>
   /* Ensure Mermaid diagrams are not affected by code block styles */
