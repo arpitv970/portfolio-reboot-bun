@@ -6,7 +6,7 @@ import '../styles/global.css'
 
 <Layout>
   <div class="flex flex-col min-h-screen">
-    <NavBar pathname={Astro.url.pathname} />
+    <NavBar client:load pathname={Astro.url.pathname} />
       <slot />
     <Footer />
   </div>
