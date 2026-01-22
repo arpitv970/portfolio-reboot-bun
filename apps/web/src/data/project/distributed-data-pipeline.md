@@ -38,6 +38,100 @@ flowchart TD
     style K fill:#c8e6c9
 ```
 
+## Infrastructure Architecture
+
+```mermaid
+flowchart TB
+    subgraph "Data Sources"
+        API[API Gateway]
+        WEB[Web Events]
+        MOB[Mobile Apps]
+        IOT[IoT Sensors]
+    end
+    
+    subgraph "Ingestion Layer"
+        KAFKA[Kafka Cluster]
+        ZK[Zookeeper]
+    end
+    
+    subgraph "Processing Layer"
+        K8S[Kubernetes Cluster]
+        SM[Spark Master]
+        SW[Spark Workers]
+        ML[ML Model Service]
+    end
+    
+    subgraph "Storage Layer"
+        S3[(AWS S3)]
+        REDIS[(Redis Cluster)]
+        CH[(ClickHouse)]
+    end
+    
+    subgraph "Monitoring"
+        PROM[Prometheus]
+        GRAF[Grafana]
+        ELK[ELK Stack]
+    end
+    
+    API --> KAFKA
+    WEB --> KAFKA
+    MOB --> KAFKA
+    IOT --> KAFKA
+    KAFKA --> ZK
+    KAFKA --> K8S
+    K8S --> SM
+    SM --> SW
+    SW --> ML
+    SW --> S3
+    SW --> REDIS
+    SW --> CH
+    K8S --> PROM
+    PROM --> GRAF
+    K8S --> ELK
+    
+    style KAFKA fill:#e3f2fd
+    style K8S fill:#e8f5e8
+    style S3 fill:#fff3e0
+```
+
+## Real-time Event Processing
+
+```mermaid
+sequenceDiagram
+    participant Source as Event Source
+    participant Kafka as Kafka Cluster
+    participant Spark as Spark Streaming
+    participant ML as ML Service
+    participant Redis as Redis Cache
+    participant S3 as S3 Storage
+    participant Dashboard as Real-time Dashboard
+    
+    Note over Source,S3: Event processing pipeline (~100ms latency)
+    
+    Source->>Kafka: Publish event
+    Kafka->>Kafka: Partition & replicate
+    Kafka->>Spark: Consume message
+    
+    Spark->>Spark: Parse & validate
+    Spark->>ML: Request enrichment
+    ML->>ML: Process features
+    ML->>Spark: Return enriched data
+    
+    par Parallel writes
+        Spark->>Redis: Cache recent events
+        and
+        Spark->>S3: Archive raw data
+        and
+        Spark->>Dashboard: Real-time update
+    end
+    
+    Dashboard->>Redis: Query recent data
+    Redis->>Dashboard: Return results
+    
+    Note over Spark: Auto-scaling based on load
+    Note over ML: Feature extraction + prediction
+```
+
 ## Event Ingestion Layer
 
 ```python
@@ -255,4 +349,68 @@ HAVING event_count > 5
 ORDER BY avg_value DESC
 LIMIT 100
 SETTINGS max_threads = 8;
+```
+
+## Development Timeline
+
+```mermaid
+gitGraph
+    commit id: "Project Setup"
+    branch feature/ingestion
+    checkout feature/ingestion
+    commit id: "Kafka Cluster"
+    commit id: "Event Ingestion"
+    
+    branch feature/processing
+    checkout feature/processing
+    commit id: "Spark Integration"
+    commit id: "Data Transformation"
+    
+    checkout main
+    merge feature/ingestion
+    commit id: "Merge Ingestion"
+    
+    checkout feature/processing
+    commit id: "ML Pipeline"
+    
+    checkout main
+    merge feature/processing
+    commit id: "Merge Processing"
+    
+    branch feature/infrastructure
+    checkout feature/infrastructure
+    commit id: "Kubernetes Setup"
+    commit id: "Monitoring Stack"
+    
+    checkout main
+    merge feature/infrastructure
+    commit id: "Merge Infrastructure"
+    
+    commit id: "Production Deploy"
+    commit id: "Scale to 10B events/day"
+```
+
+## Data Flow Distribution
+
+```mermaid
+sankey-beta
+    Event Sources,Kafka Ingestion,10000
+    Kafka Ingestion,Spark Processing,9500
+    Kafka Ingestion,Error Handling,500
+    Spark Processing,Data Transformation,6000
+    Spark Processing,ML Enrichment,2500
+    Spark Processing,Quality Checks,1000
+    Data Transformation,S3 Storage,3000
+    Data Transformation,Redis Cache,2000
+    Data Transformation,ClickHouse,1000
+    ML Enrichment,Feature Store,1500
+    ML Enrichment,Prediction Service,1000
+    Quality Checks,Error Queue,800
+    Quality Checks,Valid Data,200
+    S3 Storage,Archive,2000
+    S3 Storage,Analytics Export,1000
+    Redis Cache,Real-time API,1500
+    Redis Cache,Session Store,500
+    ClickHouse,Business Intelligence,800
+    ClickHouse,Real-time Dashboard,200
 ```

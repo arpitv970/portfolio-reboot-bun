@@ -35,6 +35,67 @@ sequenceDiagram
     Note over OrderBook: < 1μs matching time
 ```
 
+## System Architecture
+
+```mermaid
+flowchart TB
+    subgraph "Client Layer"
+        WEB[Trading Web UI]
+        API_CLIENT[API Clients]
+        ALGO[Algorithm Bots]
+    end
+    
+    subgraph "Gateway Layer"
+        LB[Load Balancer]
+        GATEWAY[API Gateway]
+        RATE[Rate Limiter]
+    end
+    
+    subgraph "Service Layer"
+        GO_SVC[Go Orchestration]
+        RUST_CORE[Rust Core Engine]
+        MARKET[Market Data Service]
+        RISK[Risk Management]
+    end
+    
+    subgraph "Data Layer"
+        ORDER_BOOK[(In-Memory Order Book)]
+        TRADES[(Trade Log)]
+        REDIS[(Redis Cache)]
+        TIMESERIES[(TimeSeries DB)]
+    end
+    
+    subgraph "Infrastructure"
+        MONITOR[Prometheus + Grafana]
+        LOG[ELK Stack]
+        ALERT[Alertmanager]
+    end
+    
+    WEB --> LB
+    API_CLIENT --> LB
+    ALGO --> LB
+    LB --> GATEWAY
+    GATEWAY --> RATE
+    RATE --> GO_SVC
+    
+    GO_SVC --> RUST_CORE
+    GO_SVC --> MARKET
+    GO_SVC --> RISK
+    
+    RUST_CORE --> ORDER_BOOK
+    RUST_CORE --> TRADES
+    GO_SVC --> REDIS
+    MARKET --> TIMESERIES
+    
+    RUST_CORE --> MONITOR
+    GO_SVC --> LOG
+    MONITOR --> ALERT
+    
+    style RUST_CORE fill:#ff6b6b
+    style ORDER_BOOK fill:#4ecdc4
+    style MONITOR fill:#45b7d1
+```
+
 ## Core Trading Engine (Rust)
 
 ```rust
@@ -95,6 +156,44 @@ impl TradingEngine {
         Ok(OrderResult { trades, remaining_order })
     }
 }
+```
+
+## Order Book State Management
+
+```mermaid
+stateDiagram-v2
+    [*] --> Received: Order Submitted
+    Received --> Validating: Basic Validation
+    Validating --> Queued: Pass Validation
+    Validating --> Rejected: Fail Validation
+    
+    Queued --> Matching: Enter Order Book
+    Matching --> PartiallyFilled: Partial Match
+    Matching --> FullyFilled: Complete Match
+    Matching --> Resting: No Match
+    
+    PartiallyFilled --> Matching: Continue Matching
+    PartiallyFilled --> Resting: No More Matches
+    
+    Resting --> Matching: New Counter Order
+    Resting --> Cancelled: User Cancellation
+    
+    FullyFilled --> [*]: Order Complete
+    
+    Cancelled --> [*]: Order Cancelled
+    Rejected --> [*]: Order Rejected
+    
+    note right of Matching
+        < 1μs execution time
+        FIFO priority
+        Price-time priority
+    end note
+    
+    note right of Resting
+        Order sits in book
+        Waiting for match
+        Can be cancelled
+    end note
 ```
 
 ## Order Book Implementation
@@ -434,5 +533,4 @@ require (
     github.com/bytedance/sonic v1.9.1 // indirect
     // ... other indirect dependencies
 )
-```</content>
-<parameter name="filePath">/Users/arpitv970/projects/portfolio-reboot-bun/apps/web/src/data/project/high-performance-trading-engine.md
+```

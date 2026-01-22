@@ -34,6 +34,45 @@ flowchart TD
     style H fill:#c8e6c9
 ```
 
+## System Architecture
+
+```mermaid
+flowchart TB
+    subgraph "Client Layer"
+        VS[VS Code Extension]
+        WEB[Web Interface]
+    end
+    
+    subgraph "API Layer"
+        API[Express.js API Gateway]
+        AUTH[Authentication Service]
+    end
+    
+    subgraph "AI Services"
+        OPENAI[OpenAI API]
+        ML[Custom ML Model]
+    end
+    
+    subgraph "Data Layer"
+        REDIS[(Redis Cache)]
+        MONGO[(MongoDB)]
+        S3[(AWS S3)]
+    end
+    
+    VS --> API
+    WEB --> API
+    API --> AUTH
+    API --> OPENAI
+    API --> ML
+    API --> REDIS
+    API --> MONGO
+    ML --> S3
+    
+    style VS fill:#e3f2fd
+    style OPENAI fill:#e8f5e8
+    style ML fill:#fff3e0
+```
+
 ## Core Features
 
 ### Smart Code Completion
@@ -87,33 +126,28 @@ class BugDetector {
 
 ## Training Pipeline
 
-```bash
-#!/bin/bash
-# Automated model training pipeline
-
-echo "Starting code quality model training..."
-
-# Data preparation
-python scripts/prepare_dataset.py \
-  --input data/code_samples.json \
-  --output data/processed/ \
-  --split 0.8
-
-# Model training
-python scripts/train_model.py \
-  --config config/bert_config.json \
-  --data data/processed/ \
-  --output models/code-quality-v2/ \
-  --epochs 10 \
-  --batch-size 16
-
-# Evaluation
-python scripts/evaluate_model.py \
-  --model models/code-quality-v2/ \
-  --test-data data/test/ \
-  --metrics accuracy precision recall f1
-
-echo "Training completed successfully!"
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant Git as Git Repo
+    participant CI as CI/CD Pipeline
+    participant Data as Data Processor
+    participant ML as ML Training
+    participant Model as Model Registry
+    participant API as Production API
+    
+    Dev->>Git: Push code changes
+    Git->>CI: Trigger pipeline
+    CI->>Data: Collect code samples
+    Data->>Data: Clean & preprocess
+    Data->>ML: Start training
+    ML->>ML: Train BERT model
+    ML->>Model: Register new model
+    Model->>API: Deploy model
+    API->>Dev: Model ready for inference
+    
+    Note over ML: Training takes ~2 hours
+    Note over Model: Version: v2.1.0
 ```
 
 ## Machine Learning Integration
@@ -176,5 +210,63 @@ Developed a comprehensive VS Code extension with:
     ]
   }
 }
-```</content>
-<parameter name="filePath">/Users/arpitv970/projects/portfolio-reboot-bun/apps/web/src/data/project/ai-code-assistant.md
+```
+
+## Development Timeline
+
+```mermaid
+gitGraph
+    commit id: "Initial Setup"
+    branch feature/ai-core
+    checkout feature/ai-core
+    commit id: "OpenAI Integration"
+    commit id: "Code Analysis Engine"
+    
+    branch feature/ui
+    checkout feature/ui
+    commit id: "VS Code Extension"
+    commit id: "React UI"
+    
+    checkout main
+    merge feature/ai-core
+    commit id: "Merge AI Core"
+    
+    checkout feature/ui
+    commit id: "Real-time Suggestions"
+    
+    checkout main
+    merge feature/ui
+    commit id: "Merge UI"
+    
+    branch feature/ml
+    checkout feature/ml
+    commit id: "BERT Model Training"
+    commit id: "Custom Classification"
+    
+    checkout main
+    merge feature/ml
+    commit id: "Merge ML"
+    
+    commit id: "v1.0 Release"
+    commit id: "Production Deploy"
+```
+
+## Cost Distribution
+
+```mermaid
+sankey-beta
+    API Calls,OpenAI GPT-4,8500
+    API Calls,Local Processing,1500
+    OpenAI GPT-4,Token Generation,6500
+    OpenAI GPT-4,Code Analysis,2000
+    Local Processing,BERT Model,1200
+    Local Processing,ESLint,300
+    Token Generation,Syntax Analysis,3500
+    Token Generation,Code Completion,3000
+    Code Analysis,Bug Detection,1200
+    Code Analysis,Refactoring,800
+    BERT Model,Quality Assessment,800
+    BERT Model,Style Analysis,400
+    ESLint,Rules Engine,250
+    ESLint,Custom Rules,50
+```

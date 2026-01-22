@@ -33,6 +33,74 @@ flowchart TD
     style H fill:#c8e6c9
 ```
 
+## Microservices Architecture
+
+```mermaid
+flowchart TB
+    subgraph "Frontend Layer"
+        WEB[React App]
+        MOBILE[Mobile App]
+        ADMIN[Admin Dashboard]
+    end
+    
+    subgraph "API Gateway"
+        GATEWAY[Kong/Nginx Gateway]
+        AUTH[Authentication Service]
+        RATE[Rate Limiting]
+    end
+    
+    subgraph "Core Services"
+        USER[User Service]
+        PROD[Product Service]
+        ORDER[Order Service]
+        CART[Cart Service]
+        PAY[Payment Service]
+        INV[Inventory Service]
+        REC[Recommendation Service]
+    end
+    
+    subgraph "Data Layer"
+        MONGO[(MongoDB)]
+        REDIS[(Redis Cache)]
+        POSTGRES[(PostgreSQL)]
+        ES[(Elasticsearch)]
+    end
+    
+    subgraph "External APIs"
+        STRIPE[Stripe API]
+        EMAIL[SendGrid]
+        ANALYTICS[Google Analytics]
+    end
+    
+    WEB --> GATEWAY
+    MOBILE --> GATEWAY
+    ADMIN --> GATEWAY
+    GATEWAY --> AUTH
+    GATEWAY --> RATE
+    GATEWAY --> USER
+    GATEWAY --> PROD
+    GATEWAY --> ORDER
+    GATEWAY --> CART
+    GATEWAY --> PAY
+    GATEWAY --> INV
+    GATEWAY --> REC
+    
+    USER --> MONGO
+    PROD --> ES
+    ORDER --> POSTGRES
+    CART --> REDIS
+    INV --> REDIS
+    REC --> MONGO
+    
+    PAY --> STRIPE
+    USER --> EMAIL
+    WEB --> ANALYTICS
+    
+    style GATEWAY fill:#e3f2fd
+    style REDIS fill:#fff3e0
+    style STRIPE fill:#e8f5e8
+```
+
 ## Key Features
 
 ### Real-time Inventory Management
@@ -50,6 +118,42 @@ Comprehensive analytics and reporting tools including:
 - Customer behavior analytics
 - Inventory turnover rates
 - Revenue breakdowns by category
+
+## Payment Processing Flow
+
+```mermaid
+sequenceDiagram
+    participant User as Customer
+    participant UI as Frontend
+    participant API as Order Service
+    participant Pay as Payment Service
+    participant Stripe as Stripe API
+    participant Inv as Inventory Service
+    participant Email as Email Service
+    
+    User->>UI: Proceed to checkout
+    UI->>API: Create order
+    API->>Inv: Reserve inventory
+    Inv->>API: Inventory confirmed
+    API->>Pay: Create payment intent
+    Pay->>Stripe: Initialize payment
+    Stripe->>Pay: Return client secret
+    Pay->>API: Payment ready
+    API->>UI: Payment details
+    
+    User->>UI: Submit payment
+    UI->>Stripe: Confirm payment (3D Secure if needed)
+    Stripe->>User: Authentication (if required)
+    User->>Stripe: Complete auth
+    Stripe->>Pay: Payment success webhook
+    Pay->>API: Update order status
+    API->>Inv: Confirm inventory deduction
+    API->>Email: Send confirmation
+    Email->>User: Order confirmation
+    
+    Note over Stripe: PCI compliant processing
+    Note over Inv: Inventory locked during payment
+```
 
 ## Technical Implementation
 

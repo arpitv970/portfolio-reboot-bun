@@ -283,70 +283,68 @@ Peer-to-peer video streaming with fallback to TURN servers:
 - Code execution and debugging
 - Whiteboard for architectural discussions
 
-# Mermaid Test Suite
+## Development Workflow
 
-## Flowchart
-```mermaid
-flowchart TD
-    A[Start] --> B{Is it?}
-    B -->|Yes| C[OK]
-    B -->|No| D[End]
-
-```
-
-## Sequence Diagram
-```mermaid
-sequenceDiagram
-    Alice->>John: Hello John
-    John-->>Alice: Great!
-```
-
-## Class Diagram
-```mermaid
-classDiagram
-    Animal <|-- Duck
-    Animal : +int age
-```
-
-## State Diagram
-```mermaid
-stateDiagram-v2
-    [*] --> Still
-    Still --> Moving
-```
-
-## ER Diagram
-```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-```
-
-## Gantt Chart
-```mermaid
-gantt
-    title Project Schedule
-    section Design
-    Task 1 :a1, 2024-01-01, 30d
-```
-
-## Git Graph
 ```mermaid
 gitGraph
-    commit id: "Initial"
-    branch develop
-    checkout develop
-    commit id: "Feature"
+    commit id: "Initial Setup"
+    branch feature/crdt
+    checkout feature/crdt
+    commit id: "CRDT Algorithm"
+    commit id: "Conflict Resolution"
+    
+    branch feature/websocket
+    checkout feature/websocket
+    commit id: "WebSocket Server"
+    commit id: "Real-time Sync"
+    
     checkout main
-    merge develop
-
+    merge feature/crdt
+    commit id: "Merge CRDT"
+    
+    checkout feature/websocket
+    commit id: "Video Chat"
+    commit id: "File Sharing"
+    
+    checkout main
+    merge feature/websocket
+    commit id: "Merge WebSocket"
+    
+    branch feature/ui
+    checkout feature/ui
+    commit id: "Monaco Integration"
+    commit id: "Theme System"
+    
+    checkout main
+    merge feature/ui
+    commit id: "Merge UI"
+    
+    commit id: "v1.0 Release"
 ```
 
-## Architecture
+## Resource Allocation
+
 ```mermaid
-flowchart TD
-    subgraph API[API Layer]
-        web[Web Server]
-    end
-    db[(Database)]
-    web --> db
+sankey-beta
+    User Sessions,WebSocket Server,3500
+    WebSocket Server,CRDT Engine,2800
+    CRDT Engine,Document Store,2000
+    CRDT Engine,Conflict Resolution,800
+    
+    User Sessions,Video Chat,1200
+    Video Chat,TURN Servers,800
+    Video Chat,STUN Servers,400
+    
+    WebSocket Server,Redis Cache,700
+    Document Store,PostgreSQL,500
+    Document Store,S3 Storage,1500
+    
+    Redis Cache,Session Data,700
+    PostgreSQL,User Metadata,200
+    PostgreSQL,Document Metadata,300
+    
+    S3 Storage,Version History,800
+    S3 Storage,File Assets,700
 ```
+
+

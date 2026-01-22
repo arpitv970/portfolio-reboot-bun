@@ -36,7 +36,85 @@ flowchart TD
     style H fill:#c8e6c9
 ```
 
+## Smart Contract Interaction
+
+```mermaid
+sequenceDiagram
+    participant V as Voter
+    participant MM as MetaMask
+    participant SC as Smart Contract
+    participant ZK as ZK Circuit
+    participant BC as Blockchain
+    participant EO as Election Official
+    
+    EO->>SC: startElection() (multi-sig)
+    SC->>BC: Election started event
+    
+    V->>MM: Connect wallet
+    MM->>V: Address & signature
+    V->>SC: registerVoter(address)
+    SC->>SC: verifyEligibility()
+    SC->>BC: Voter registered
+    
+    V->>ZK: Generate ZK proof
+    ZK->>V: proof + encrypted vote
+    V->>MM: submitVote(proof, vote)
+    MM->>SC: castVote()
+    SC->>SC: verifyZKProof()
+    SC->>BC: Vote recorded
+    
+    EO->>SC: endElection() (multi-sig)
+    SC->>BC: Results published
+    
+    Note over ZK: Privacy preserved
+    Note over BC: Immutable record
+```
+
 ## Security Architecture
+
+```mermaid
+flowchart TB
+    subgraph "Application Layer"
+        WEB[Web Interface]
+        API[Backend API]
+        AUTH[Authentication]
+    end
+    
+    subgraph "Blockchain Layer"
+        MM[MetaMask]
+        SC[Smart Contracts]
+        ZK[ZK Proofs]
+    end
+    
+    subgraph "Security Layers"
+        HSM[Hardware Security Module]
+        MSIG[Multi-Signature Wallet]
+        AUDIT[Security Audits]
+        PEN[Penetration Testing]
+    end
+    
+    subgraph "Compliance"
+        KYC[KYC Verification]
+        GDPR[GDPR Compliance]
+        WCAG[Accessibility]
+    end
+    
+    WEB --> MM
+    MM --> SC
+    SC --> ZK
+    API --> AUTH
+    SC --> MSIG
+    MSIG --> HSM
+    SC --> AUDIT
+    AUDIT --> PEN
+    AUTH --> KYC
+    WEB --> GDPR
+    WEB --> WCAG
+    
+    style ZK fill:#e8f5e8
+    style MSIG fill:#fff3e0
+    style HSM fill:#ffebee
+```
 
 ### Zero-Knowledge Proofs
 Implemented zero-knowledge proofs to maintain voter anonymity while preventing double-voting. Voters can prove they voted without revealing their choice, and the system can verify votes without knowing the voter's identity.
@@ -175,3 +253,66 @@ Core smart contracts released under MIT license to encourage:
 - Educational use in universities
 - Adoption by civic organizations
 - Continuous improvement through collaboration
+
+## Development Workflow
+
+```mermaid
+gitGraph
+    commit id: "Project Setup"
+    branch feature/smart-contracts
+    checkout feature/smart-contracts
+    commit id: "Core Voting Contract"
+    commit id: "ZK Proofs Integration"
+    commit id: "Multi-sig Controls"
+    
+    branch feature/ui
+    checkout feature/ui
+    commit id: "React Interface"
+    commit id: "MetaMask Integration"
+    commit id: "Multi-language Support"
+    
+    checkout main
+    merge feature/smart-contracts
+    commit id: "Merge Smart Contracts"
+    
+    checkout feature/ui
+    commit id: "Accessibility Features"
+    
+    checkout main
+    merge feature/ui
+    commit id: "Merge UI"
+    
+    branch feature/security
+    checkout feature/security
+    commit id: "Security Audit"
+    commit id: "Penetration Testing"
+    
+    checkout main
+    merge feature/security
+    commit id: "Merge Security"
+    
+    commit id: "Mainnet Deploy"
+    commit id: "University Pilot"
+```
+
+## Resource Allocation
+
+```mermaid
+sankey-beta
+    Development,Smart Contract Dev,4500
+    Development,Frontend Dev,3000
+    Development,Security Audit,1500
+    Development,Infrastructure,1000
+    Smart Contract Dev,Solidity Coding,2500
+    Smart Contract Dev,ZK Implementation,1200
+    Smart Contract Dev,Testing,800
+    Frontend Dev,React Components,1500
+    Frontend Dev,Web3 Integration,800
+    Frontend Dev,Mobile Responsive,700
+    Security Audit,Contract Audit,800
+    Security Audit,Penetration Testing,500
+    Security Audit,Formal Verification,200
+    Infrastructure,Ethereum Nodes,400
+    Infrastructure,IPFS Storage,300
+    Infrastructure,Monitoring,300
+```
