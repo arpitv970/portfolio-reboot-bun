@@ -6,7 +6,7 @@ export const { getStaticPaths, GET } = await OGImageRoute({
 
   // Define pages that need OG images
   pages: {
-    'image': {
+    '/': {
       title: "I'm Arpit 👋 Building boring systems that quietly print serious money for your business",
       description: "Engineering scalable multi-tenant CRMs, ERPs & Dashboards with granular access controls and plugins for Salesforce, SAP or any of your ecosystem"
     }

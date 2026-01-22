@@ -12,14 +12,14 @@
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={Astro.props.title || "Arpit Verma - Full Stack Developer"} />
 		<meta property="og:description" content={Astro.props.description || "Building scalable multi-tenant CRMs, ERPs & Dashboards with granular access controls"} />
-		<meta property="og:image" content={Astro.props.ogImage || `${Astro.url.origin}/og/${Astro.url.pathname === '/' ? 'image' : Astro.url.pathname.slice(1)}.png`} />
+		<meta property="og:image" content={Astro.props.ogImage || `${Astro.url.origin}/og/${Astro.url.pathname === '/' ? '' : Astro.url.pathname.slice(1)}.png`} />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={Astro.url} />
 		<meta property="twitter:title" content={Astro.props.title || "Arpit Verma - Full Stack Developer"} />
 		<meta property="twitter:description" content={Astro.props.description || "Building scalable multi-tenant CRMs, ERPs & Dashboards with granular access controls"} />
-		<meta property="twitter:image" content={Astro.props.ogImage || `${Astro.url.origin}/og/${Astro.url.pathname === '/' ? 'image' : Astro.url.pathname.slice(1)}.png`} />
+		<meta property="twitter:image" content={Astro.props.ogImage || `${Astro.url.origin}/og/${Astro.url.pathname === '/' ? '' : Astro.url.pathname.slice(1)}.png`} />
 	</head>
 	<body>
 		<slot />
