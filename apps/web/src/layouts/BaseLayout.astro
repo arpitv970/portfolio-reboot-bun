@@ -2,17 +2,9 @@
 import { NavBar, Footer } from '@/components/shared'
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css'
-
-interface Props {
-  title?: string;
-  description?: string;
-  ogImage?: string;
-}
-
-const { title, description, ogImage } = Astro.props;
 ---
 
-<Layout title={title} description={description} ogImage={ogImage}>
+<Layout>
   <div class="flex flex-col min-h-screen">
     <NavBar pathname={Astro.url.pathname} />
       <slot />
