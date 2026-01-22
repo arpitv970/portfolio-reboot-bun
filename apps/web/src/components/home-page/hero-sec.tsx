@@ -1,5 +1,6 @@
 import { SectionWrapper } from "../shared"
 import { Button } from "../ui/button"
+import { Calendar } from "lucide-react"
 
 export const HeroSec = () => {
   return (
@@ -20,7 +21,10 @@ export const HeroSec = () => {
           Engineering scalable multi-tenant <b>CRMs, ERPs & Dashboards</b> with granular access controls and plugins for <i>Salesforce, SAP or any of your ecosystem</i>
         </p>
         <Button asChild size="lg" className="mt-8 z-10">
-          <a href="/contact">{`Let's Work Together`}</a>
+          <a href="https://cal.com/arpitv970">
+            <Calendar className="w-4 h-4" />
+            Book a Quick Call
+          </a>
         </Button>
       </div>
     </SectionWrapper>
