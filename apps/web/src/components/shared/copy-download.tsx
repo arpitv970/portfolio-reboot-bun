@@ -37,7 +37,7 @@ export const CopyDownload: React.FC<ICopyDownload> = ({ content, filename }) => 
     } else if (opts === OptionEnum.DOWNLOAD_MD) {
 
     } else if (opts === OptionEnum.DOWNLOAD_PDF) {
-
+      window.print()
     }
   }
 

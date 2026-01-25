@@ -1,0 +1,58 @@
+@media print {
+  /* hide everything */
+  body * {
+    visibility: hidden;
+  }
+
+  /* show only printable area */
+  #print,
+  #print * {
+    visibility: visible;
+  }
+
+  /* move printable section to top */
+  #print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* remove layout spacing */
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  /* typography fixes */
+  #print h1 {
+    font-size: 32px;
+  }
+
+  #print h2 {
+    page-break-after: avoid;
+  }
+
+  #print p,
+  #print li {
+    page-break-inside: avoid;
+  }
+
+  /* force light theme */
+  .dark #print {
+    color: black !important;
+    background: white !important;
+  }
+
+  /* tailwind prose fix */
+  #print.prose {
+    max-width: 100%;
+  }
+
+  /* remove links underline + color */
+  #print a {
+    color: black;
+    text-decoration: none;
+  }
+}
