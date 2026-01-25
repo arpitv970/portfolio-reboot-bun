@@ -1,6 +1,7 @@
 ---
 import { NavBar, Footer } from '@/components/shared'
 import Layout from '../layouts/Layout.astro';
+import { Toaster } from "@/components/ui/sonner"
 import '../styles/global.css'
 ---
 
@@ -8,6 +9,7 @@ import '../styles/global.css'
   <div class="flex flex-col min-h-screen">
     <NavBar client:load pathname={Astro.url.pathname} />
       <slot />
+      <Toaster client:load />
     <Footer />
   </div>
 </Layout>

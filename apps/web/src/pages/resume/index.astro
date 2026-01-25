@@ -12,8 +12,8 @@ const { name, title: jobTitle, location, email, website, github, linkedin, x } =
 ---
 <BaseLayout title={name} description={jobTitle}>
   <PageWrapper title="Resume">
-    <CopyDownload slot={'cta'} />
-    <article class="mb-20">
+    <CopyDownload content={resume.body as string} slot={'cta'} client:load />
+    <article id='resume' class="mb-20">
 
       <div>
         {/* Resume Title */}
