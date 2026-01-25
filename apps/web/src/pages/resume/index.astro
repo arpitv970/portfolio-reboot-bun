@@ -4,6 +4,7 @@ import PageWrapper from "@/components/shared/PageWrapper.astro"
 import { Separator } from "@/components/ui/separator"
 import { getCollection, render } from "astro:content";
 import { CopyDownload } from "@/components/shared";
+import "../../styles/print.css";
 
 const resumeCollection = await getCollection("resume");
 const resume = resumeCollection[0];
@@ -12,7 +13,7 @@ const { name, title: jobTitle, location, email, website, github, linkedin, x } =
 ---
 <BaseLayout title={name} description={jobTitle}>
   <PageWrapper title="Resume">
-    <CopyDownload content={resume.body as string} slot={'cta'} client:load />
+    <CopyDownload content={resume.body as string} resumeData={resume.data} slot={'cta'} client:load />
     <article id='print' class="mb-20">
 
       <div>

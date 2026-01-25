@@ -20,24 +20,46 @@ enum OptionEnum {
   DOWNLOAD_PDF = 'Download as PDF'
 }
 
+interface ResumeData {
+  name: string;
+  title: string;
+  location: string;
+  email: string;
+  website?: string;
+  github?: string;
+  linkedin?: string;
+  x?: string;
+}
+
 interface ICopyDownload {
   /** raw markdown content */
   content: string;
 
-  /** optional filename */
-  filename?: string;
+  /** resume data for PDF generation */
+  resumeData?: ResumeData;
 }
 
-export const CopyDownload: React.FC<ICopyDownload> = ({ content, filename }) => {
+export const CopyDownload: React.FC<ICopyDownload> = ({ content, resumeData }) => {
 
   const handleAction = async (opts: OptionEnum) => {
     if (opts === OptionEnum.COPY_MD) {
       await navigator.clipboard.writeText(content)
       toast.success("Markdown copied to clipboard");
     } else if (opts === OptionEnum.DOWNLOAD_MD) {
-
+      // Download as markdown
+      const blob = new Blob([content], { type: 'text/markdown' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${resumeData?.name?.replace(/\s+/g, '-').toLowerCase() || 'resume'}-resume.md`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+      toast.success("Markdown downloaded successfully");
     } else if (opts === OptionEnum.DOWNLOAD_PDF) {
-      window.print()
+      window.print();
+      toast.success("PDF generation initiated - use browser print dialog");
     }
   }
 
