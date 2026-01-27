@@ -3,16 +3,14 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import type { CollectionEntry } from "astro:content"
 
 interface IProps {
-  project: CollectionEntry<'project'> | CollectionEntry<'service'>
-  collection?: 'projects' | 'services'
+  service: CollectionEntry<'service'>
 }
 
-export const ProjectCard: React.FC<IProps> = ({ project, collection = 'projects' }) => {
-  const { id, data } = project
-  const href = `/${collection}/${id}`
+export const ServiceCard: React.FC<IProps> = ({ service }) => {
+  const { id, data } = service
 
   return (
-    <a href={href}>
+    <a href={`/services/${id}`}>
       <Card className="overflow-hidden group h-full">
         <CardHeader className="p-0 -mt-8">
           <div className="relative h-52 overflow-hidden">

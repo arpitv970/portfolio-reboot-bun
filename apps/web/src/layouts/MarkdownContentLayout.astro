@@ -1,0 +1,81 @@
+---
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { MaxWidthWrapper } from '@/components/shared'
+
+interface Props {
+  title: string
+  description: string
+  coverImgSrc: string
+  tags?: string[]
+  readingTime?: string
+  id: string
+  Content: any
+}
+
+const { title, description, coverImgSrc, tags, readingTime, id, Content } = Astro.props
+---
+
+<MaxWidthWrapper>
+  <article class="my-20">
+
+    {/* Hero Image - Constrained Height */}
+    <div class="relative w-full aspect-[2/1] rounded-xl overflow-hidden border bg-muted mb-8 shadow-sm">
+      <img
+        src={coverImgSrc}
+        alt={title}
+        class="w-full h-full object-cover"
+        transition:name={`image-${id}`}
+      />
+    </div>
+
+    <div>
+      {readingTime && (
+        <div class="flex items-center gap-2 text-sm text-muted-foreground">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          {readingTime}
+        </div>
+      )}
+
+      {/* Title */}
+      <h1 class="text-5xl text-pretty font-black mb-4">{title}</h1>
+
+      {/* Description */}
+      <p class="text-lg text-muted-foreground mb-6">{description}</p>
+
+      {tags && (
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <Badge key={tag} variant="secondary" className="px-3 py-1 text-sm">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <Separator className="my-10" />
+
+    {/* Content */}
+    <div class="prose prose-lg max-w-none dark:prose-invert">
+      <Content />
+    </div>
+
+  </article>
+</MaxWidthWrapper>
+
+<style>
+  /* Ensure Mermaid diagrams are not affected by code block styles */
+  .prose pre.mermaid,
+  .prose .mermaid {
+    padding: 1.5rem;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .prose pre.mermaid code {
+    display: none; /* Hide any code tags inside Mermaid */
+  }
+</style>

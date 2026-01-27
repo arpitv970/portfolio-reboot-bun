@@ -26,4 +26,14 @@ const resume = defineCollection({
   })
 })
 
-export const collections = { project, resume }
+const service = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: 'src/data/service' }),
+  schema: z.object({
+    title: z.string(),
+    tags: z.array(z.string()).optional(),
+    description: z.string(),
+    coverImgSrc: z.string()
+  })
+})
+
+export const collections = { project, resume, service }
