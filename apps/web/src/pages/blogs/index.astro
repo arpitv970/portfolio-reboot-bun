@@ -1,10 +1,17 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro"
 import PageWrapper from "@/components/shared/PageWrapper.astro"
-import { UnderDev } from "@/components/shared"
+import { getCollection, type CollectionEntry } from "astro:content"
+import { ProjectCard } from "@/components/shared/project"
+
+const blogs = await getCollection("blog")
+
+type Blog = CollectionEntry<"blog">
 ---
 <BaseLayout>
   <PageWrapper title="Blogs">
-    <UnderDev className="h-[50vh]" />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {blogs.map((b: Blog) => <ProjectCard project={b} collection="blogs" />)}
+    </div>
   </PageWrapper>
 </BaseLayout>
