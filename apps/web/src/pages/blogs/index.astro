@@ -5,13 +5,16 @@ import { getCollection, type CollectionEntry } from "astro:content"
 import { ProjectCard } from "@/components/shared/project"
 
 const blogs = await getCollection("blog")
+const sortedBlogs = blogs.sort((a, b) => 
+  new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+)
 
 type Blog = CollectionEntry<"blog">
 ---
 <BaseLayout>
   <PageWrapper title="Blogs">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {blogs.map((b: Blog) => <ProjectCard project={b} collection="blogs" />)}
+      {sortedBlogs.map((b: Blog) => <ProjectCard project={b} collection="blogs" />)}
     </div>
   </PageWrapper>
 </BaseLayout>
