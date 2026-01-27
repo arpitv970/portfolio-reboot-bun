@@ -21,7 +21,7 @@ const { title, description, tags, coverImgSrc } = service.data;
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={coverImgSrc}>
   <MaxWidthWrapper>
     <article class="my-20">
 

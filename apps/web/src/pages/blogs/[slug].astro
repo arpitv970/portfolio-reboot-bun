@@ -20,7 +20,7 @@ const { title, description, tags, coverImgSrc, publishedAt, author } = blog.data
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={coverImgSrc}>
   <MaxWidthWrapper>
     <article class="my-20">
 

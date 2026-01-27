@@ -4,9 +4,17 @@ import Layout from '../layouts/Layout.astro';
 import { Toaster } from "@/components/ui/sonner"
 import '../styles/global.css'
 import '../styles/print.css'
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
 ---
 
-<Layout>
+<Layout title={title} description={description} image={image}>
   <div class="flex flex-col min-h-screen">
     <NavBar client:load pathname={Astro.url.pathname} />
       <slot />
