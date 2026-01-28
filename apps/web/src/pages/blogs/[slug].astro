@@ -2,9 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import { getCollection, render } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { MaxWidthWrapper } from '@/components/shared'
+import MarkdownContentLayout from "@/layouts/MarkdownContentLayout.astro";
 
 export const getStaticPaths = (async () => {
   const blogs = await getCollection("blog");
@@ -21,86 +19,15 @@ const { readingTime } = remarkPluginFrontmatter;
 ---
 
 <BaseLayout title={title} description={description} image={coverImgSrc}>
-  <MaxWidthWrapper>
-    <article class="my-20">
-
-      {/* Hero Image - Constrained Height */}
-      <div class="relative w-full aspect-[2/1] rounded-xl overflow-hidden border bg-muted mb-8 shadow-sm">
-        <img
-          src={coverImgSrc}
-          alt={title}
-          class="w-full h-full object-cover"
-          transition:name={`image-${blog.id}`}
-        />
-      </div>
-
-      <div>
-        {/* Metadata */}
-        <div class="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-          {publishedAt && (
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-              {new Date(publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </div>
-          )}
-          {author && (
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-              </svg>
-              {author}
-            </div>
-          )}
-          {remarkPluginFrontmatter?.readingTime && (
-            <div class="flex items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              {readingTime}
-            </div>
-          )}
-        </div>
-
-        {/* Blog Title */}
-        <h1 class="text-5xl text-pretty font-black mb-4">{title}</h1>
-
-        {/* Blog Description */}
-        <p class="text-lg text-muted-foreground mb-6">{description}</p>
-
-        {tags && (
-          <div class="flex flex-wrap gap-2 mb-6">
-            {tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="px-3 py-1 text-sm">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <Separator className="my-10" />
-
-      {/* Content */}
-      <div class="prose prose-lg max-w-none dark:prose-invert">
-        <Content />
-      </div>
-
-    </article>
-  </MaxWidthWrapper>
+  <MarkdownContentLayout 
+    title={title}
+    description={description}
+    coverImgSrc={coverImgSrc}
+    tags={tags}
+    readingTime={readingTime}
+    id={blog.id}
+    Content={Content}
+    publishedAt={publishedAt}
+    author={author}
+  />
 </BaseLayout>
-
-<style>
-  /* Ensure Mermaid diagrams are not affected by code block styles */
-  .prose pre.mermaid,
-  .prose .mermaid {
-    padding: 1.5rem;
-    background-color: transparent;
-    border: none;
-  }
-  
-  .prose pre.mermaid code {
-    display: none; /* Hide any code tags inside Mermaid */
-  }
-</style>
