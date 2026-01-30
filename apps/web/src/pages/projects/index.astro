@@ -1,16 +1,21 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro"
 import PageWrapper from "@/components/shared/PageWrapper.astro"
-import { getCollection } from "astro:content";
-import { ProjectCard } from "@/components/shared/project";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { ProjectCard, NotFound } from "@/components/shared";
 
 const projects = await getCollection("project");
+
+type Project = CollectionEntry<"project">;
 ---
 <BaseLayout>
   <PageWrapper title="Personal Projects">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-    {projects.map(p => <ProjectCard project={p} />)}
-          </div>
+    {projects.length !== 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((p: Project) => <ProjectCard project={p} collection="projects" />)}
+      </div>
+    ) : (
+      <NotFound type="project" />
+    )}
   </PageWrapper>
 </BaseLayout>
