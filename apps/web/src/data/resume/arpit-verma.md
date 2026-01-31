@@ -11,32 +11,56 @@ linkedin: "https://www.linkedin.com/in/arpitv970"
 
 ## Experience
 
+### Full Stack Developer — voiceXP.ai  
+**January 2025 – Present**
+
+- Working on **voice-to-voice agentic AI systems**, contributing across platform components requiring advanced **TypeScript expertise**.
+- Built a **fully type-safe TypeScript SDK/package** enabling websites to connect and interact with the proprietary voice-to-voice agentic AI pipeline.
+- Implemented AI-driven browser actions including **navigation, form filling, scrolling, and page interaction** based on agent instructions.
+- Contributed to **phone-calling infrastructure**, enabling real-time AI interaction over voice channels.
+- Conducted R&D on reducing third-party dependencies and latency, including exploration of **SIP proxy servers, VoIP systems, and SIP IP routing** (ongoing).
+- Helped integrate the agentic AI pipeline with **telephony systems** for inbound and outbound calls.
+- Built a high-performance **CRM platform** providing dashboards for call analytics, logs, insights, and operational monitoring.
+- Developed the CRM using **pnpm workspaces** with:
+  - Frontend: **TanStack Router, TanStack Query, Zustand**
+  - Backend: **NestJS**, **BullMQ** for background jobs, bulk processing, and slow AI workflows
+- Designed data layer using **PostgreSQL** with **TypeORM**.
+- Worked across cloud environments including **Google Cloud Platform (GCP)** and **Microsoft Azure**.
+- Managed DNS, routing, and edge configuration using **Cloudflare**.
+- Actively contributing to new platform features currently under development and rollout.
+
+---
 ### Full Stack Developer — EHR Logic  
 **March 2023 – January 2025**
 
-- Designed and implemented efficient user interfaces and APIs for blood bank projects using Next.js, React.js, Node.js, and Express.js.
-- Managed data with MySQL and Sequelize ORM for streamlined performance.
-- Handled DevOps tasks with Docker, Kubernetes, and Terraform, ensuring smooth deployments.
-- Utilized AWS services for scalable and reliable applications.
-- Built CI/CD pipelines with Jenkins, ensuring fast and automated workflows.
-- Conducted monitoring and logging using Prometheus and Grafana for performance reliability.
+- Developed core modules for a **multi-tenant Blood Management System** used by blood banks, hospitals, and healthcare organizations.
+- Built complex, inter-dependent features with full **frontend, backend, and database ownership**.
+- Worked with **React.js**, **Express.js**, and **MySQL** to deliver scalable healthcare workflows.
+- Implemented major modules including **global search**, **end-to-end billing**, and **nested patient onboarding processes**.
+- Designed reusable **dynamic step-form architecture**, leveraging **Zod** for schema-driven validation and flexibility.
+- Developed backend APIs handling business logic, database transactions, and integrations.
+- Built **automation and web-scraping solutions using Puppeteer** for client-specific operational requirements.
+- Contributed to infrastructure and deployments on **AWS** including **RDS, EC2, Amplify, App Runner, and Lightsail**.
 
 ---
 
 ### Frontend Developer — JUMakerSpace, JECRC University  
-**June 2022 – Jan 2023**
+**June 2022 – January 2023**
 
-- Developed dynamic and responsive landing pages using Next.js and TypeScript.
-- Increased user engagement by attracting 500+ new users with enhanced interfaces.
-- Streamlined hackathon organization, improving event management efficiency.
+- Developed the primary **entry-point web application** for multiple technical events organized by the university tech club.
+- Built the application using **Next.js and TypeScript**, focusing on performance, scalability, and maintainability.
+- Implemented event-specific pages and dynamic flows for **hackathon registrations, participant onboarding, and event management**.
+- Collaborated with organizers and student teams to rapidly deliver features under strict event timelines.
 
 ---
 
 ### Frontend Developer Intern — Eventia Pro  
-**Jan 2022 – April 2022**
+**January 2022 – April 2022**
 
-- Followed clean code practices to ensure high-quality development.
-- Optimized user interfaces with Next.js and TypeScript, improving SEO performance.
+- Worked on a SaaS-based event management platform built using **Next.js and TypeScript**.
+- Developed marketing and landing pages aligned with product and brand requirements.
+- Improved **SEO structure, metadata, and page performance**, contributing to better organic search visibility.
+- Collaborated with designers and backend teams to implement UI components and user-facing features.
 
 ---
 
