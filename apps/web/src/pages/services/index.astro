@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro"
 import PageWrapper from "@/components/shared/PageWrapper.astro"
 import { getCollection, type CollectionEntry } from "astro:content"
-import { ProjectCard } from "@/components/shared/project"
+import { ProjectCard, NotFound } from "@/components/shared"
 
 const services = await getCollection("service")
 
@@ -10,8 +10,12 @@ type Service = CollectionEntry<"service">
 ---
 <BaseLayout>
   <PageWrapper title="Services">
+    {services.length !== 0 ? (
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((s: Service) => <ProjectCard project={s} collection="services" />)}
     </div>
+    )
+    : <NotFound type="service" />
+ }
   </PageWrapper>
 </BaseLayout>
