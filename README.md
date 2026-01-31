@@ -28,18 +28,22 @@ Don't over-engineer simple problems. A portfolio needs:
 
 ## Quick Start
 
+**Full project:**
+1. Fork this repo (click "Fork" button ↑)
+2. Clone your fork:
+```bash
+git clone https://github.com/YOUR_USERNAME/portfolio-reboot-bun.git
+cd portfolio-reboot-bun
+bun install
+```
+
 **Boilerplate (mock branch):**
+1. Fork this repo
+2. Add upstream and fetch mock branch:
 ```bash
 git remote add upstream https://github.com/arpitv970/portfolio-reboot-bun.git
 git fetch upstream mock:mock
 git checkout mock
-```
-
-**Full project:**
-```bash
-git clone https://github.com/arpitv970/portfolio-reboot-bun.git
-cd portfolio-reboot-bun
-bun install
 ```
 
 ## Development
