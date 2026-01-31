@@ -14,33 +14,23 @@ linkedin: "https://www.linkedin.com/in/arpitv970"
 ### Full Stack Developer — voiceXP.ai  
 **January 2025 – Present**
 
-- Working on **voice-to-voice agentic AI systems**, contributing across platform components requiring advanced **TypeScript expertise**.
-- Built a **fully type-safe TypeScript SDK/package** enabling websites to connect and interact with the proprietary voice-to-voice agentic AI pipeline.
-- Implemented AI-driven browser actions including **navigation, form filling, scrolling, and page interaction** based on agent instructions.
-- Contributed to **phone-calling infrastructure**, enabling real-time AI interaction over voice channels.
-- Conducted R&D on reducing third-party dependencies and latency, including exploration of **SIP proxy servers, VoIP systems, and SIP IP routing** (ongoing).
-- Helped integrate the agentic AI pipeline with **telephony systems** for inbound and outbound calls.
-- Built a high-performance **CRM platform** providing dashboards for call analytics, logs, insights, and operational monitoring.
-- Developed the CRM using **pnpm workspaces** with:
-  - Frontend: **TanStack Router, TanStack Query, Zustand**
-  - Backend: **NestJS**, **BullMQ** for background jobs, bulk processing, and slow AI workflows
-- Designed data layer using **PostgreSQL** with **TypeORM**.
-- Worked across cloud environments including **Google Cloud Platform (GCP)** and **Microsoft Azure**.
-- Managed DNS, routing, and edge configuration using **Cloudflare**.
-- Actively contributing to new platform features currently under development and rollout.
+- Working on production-grade **voice-to-voice agentic AI systems**, contributing across platform architecture using advanced **TypeScript**.
+- Designed and maintained **fully type-safe SDKs** enabling web applications to integrate with AI-driven voice and automation services.
+- Implemented **AI-controlled browser automation** including navigation, form interaction, scrolling, and task execution.
+- Contributed to **real-time voice communication and telephony integrations**, supporting inbound and outbound AI-driven calls.
+- Built and scaled an internal **CRM and analytics platform** for call monitoring, logs, insights, and operational visibility.
+- Developed and deployed full-stack systems using **NestJS, PostgreSQL (TypeORM), BullMQ**, with infrastructure across **GCP, Azure, and Cloudflare**.
 
 ---
 ### Full Stack Developer — EHR Logic  
 **March 2023 – January 2025**
 
-- Developed core modules for a **multi-tenant Blood Management System** used by blood banks, hospitals, and healthcare organizations.
-- Built complex, inter-dependent features with full **frontend, backend, and database ownership**.
-- Worked with **React.js**, **Express.js**, and **MySQL** to deliver scalable healthcare workflows.
-- Implemented major modules including **global search**, **end-to-end billing**, and **nested patient onboarding processes**.
-- Designed reusable **dynamic step-form architecture**, leveraging **Zod** for schema-driven validation and flexibility.
-- Developed backend APIs handling business logic, database transactions, and integrations.
-- Built **automation and web-scraping solutions using Puppeteer** for client-specific operational requirements.
-- Contributed to infrastructure and deployments on **AWS** including **RDS, EC2, Amplify, App Runner, and Lightsail**.
+- Worked on a production **multi-tenant healthcare platform** serving blood banks, hospitals, and medical organizations.
+- Owned end-to-end development of complex features across **frontend, backend, and database layers**.
+- Built scalable workflows using **React.js, Express.js, and MySQL**, supporting critical healthcare operations.
+- Implemented major system modules including **global search, billing flows, and multi-step patient onboarding**.
+- Designed reusable **dynamic step-form architecture** with schema-driven validation using **Zod**.
+- Developed backend APIs, automation tools, and **browser-based workflows using Puppeteer**, with deployments across **AWS infrastructure**.
 
 ---
 
